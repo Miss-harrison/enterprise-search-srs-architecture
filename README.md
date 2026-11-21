@@ -1,9 +1,32 @@
 # Enterprise Search Implementation: SRS & Architecture Blueprint
 
+![Architecture](https://shields.io)
+![Documentation](https://shields.io)
+![SLA Target](https://shields.io)
+
 ## Overview
 This repository contains a sanitized **Software Requirements Specification (SRS)**, **Search Schema Design**, and **UAT Performance Plan** created for a multi-catalog enterprise search and filtering implementation powered by **Apache Solr**.
 
 As a **Technical IT Project Manager & Solutions Designer**, my role bridges business discovery and backend engineering—translating complex user search behaviors into structured data schemas, indexing workflows, query optimization rules, and measurable QA benchmarks.
+
+## High-Level System Architecture
+
+```mermaid
+flowchart LR
+    A[(Primary DB / CMS)] -->|Delta & Full Sync| B[ETL & Data Normalization]
+    B -->|JSON / HTTP Indexing API| C{Apache SolrCloud Cluster}
+    
+    subgraph SolrCloud Ecosystem
+        C --> D[ZooKeeper Ensemble<br/>Cluster State & Failover]
+        C --> E[Shard 1 + Replicas]
+        C --> F[Shard 2 + Replicas]
+        E & F --- G[(Filter & Query Caches)]
+    end
+
+    C -->|REST / JSON Search API| H[Search Middleware / BFF]
+    H --> I[Autocomplete UI<br/>< 80ms SLA]
+    H --> J[Faceted Catalog Search<br/>< 180ms P95 SLA]
+```
 
 ## Repository Structure
 * **[01-system-architecture-srs.md](./01-system-architecture-srs.md)** — Functional & non-functional requirements, data ingestion flow, and high-level SolrCloud architecture.
