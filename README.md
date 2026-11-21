@@ -1,9 +1,5 @@
 # Enterprise Search Implementation: SRS & Architecture Blueprint
 
-![Architecture](https://shields.io)
-![Documentation](https://shields.io)
-![SLA Target](https://shields.io)
-
 ## Overview
 This repository contains a sanitized **Software Requirements Specification (SRS)**, **Search Schema Design**, and **UAT Performance Plan** created for a multi-catalog enterprise search and filtering implementation powered by **Apache Solr**.
 
